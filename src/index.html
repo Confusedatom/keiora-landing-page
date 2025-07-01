@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <title>The Prototype</title>
+</head>
+<body class="bg-gradient-to-br from-blue-500 to-orange-400 min-h-screen text-gray-900">
+    <header class="sticky top-0 z-50 bg-white bg-opacity-80 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center w-full">
+        <div class="text-xl font-bold text-gray-800">Keiora</div>
+        <!-- Hamburger button for mobile -->
+        <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 p-2 rounded hover:bg-gray-200 focus:outline-none" aria-label="Open menu">
+            <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+            <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+            <span class="block w-6 h-0.5 bg-gray-800"></span>
+        </button>
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex space-x-6 text-gray-700">
+            <a href="#" class="link transition-colors">Home</a>
+            <a href="#" class="link transition-colors">About</a>
+            <a href="#" class="link transition-colors">Services</a>
+            <a href="#" class="link transition-colors">Contact</a>
+        </nav>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-900 button hidden md:block">
+            Get Started
+        </button>
+        <!-- Mobile nav dropdown -->
+        <nav id="mobile-menu" class="absolute top-full left-0 w-full bg-white bg-opacity-95 shadow-md flex-col items-center space-y-4 py-4 px-6 text-gray-700 fox md:hidden hidden">
+            <a href="#" class="block w-full text-center py-2 link transition-colors mobile-menu-link">Home</a>
+            <a href="#" class="block w-full text-center py-2 link transition-colors mobile-menu-link">About</a>
+            <a href="#" class="block w-full text-center py-2 link transition-colors mobile-menu-link">Services</a>
+            <a href="#" class="block w-full text-center py-2 link transition-colors mobile-menu-link">Contact</a>
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-900 w-full mt-2 mobile-menu-link">Get Started</button>
+        </nav>
+    </header>
+    <section class="flex flex-col items-center justify-center min-h-screen text-center px-6 text-white">
+        <h1 class="font-bold text-5xl md:text-6xl mb-4">Welcome to Keiora</h1>
+        <p class="text-lg md-text-xl max-w-xl mb-6">Discover and connect with a vibrant community. Find what you're looking for.</p>
+        <div class="flex w-full max-w-lg rounded-lg shadow-md overflow-hidden bg-white">
+            <input id="searchInput" type="text" placeholder="Enter your Query" class="w-full px-4 py-3 text-gray-700 focus:outline-none">
+            <button id="searchBtn" class="bg-blue-600 hover:bg-blue-900 text-white px-4 flex justify-center items-center">
+                <img src="search-outline.svg" alt="search-outline" class="w-4 h-4">
+            </button>
+        </div>
+    </section>
+
+    <section class="bg-gray-50 py-12 px-6">
+        <h2 class="text-3xl text-center text-gray-800 font-bold mb-9">What Our Community Says</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-start space-x-4 card">
+                <img src="1335179.png" alt="" class="h-12 w-12 rounded-full object-cover">
+                <div>
+                    <p class="text-gray-700">"Keiora has changed the way I interact with my peers. Highly recommend!"</p>
+                    <p class="text-sm font-semibold text-gray-900 mt-2">- Jane Smith</p>
+                </div>
+            </div>
+
+             <div class="bg-white p-4 rounded-lg shadow-md flex items-start space-x-4 card">
+                <img src="1349415.jpeg" alt="" class="h-12 w-12 rounded-full object-cover">
+                <div>
+                    <p class="text-gray-700">"Keiora has transformed the way I connect with others. It's a fantastic platform!"</p>
+                    <p class="text-sm font-semibold text-gray-900 mt-2">- Xavier Salvatore</p>
+                </div>
+            </div>
+             <div class="bg-white p-4 rounded-lg shadow-md flex items-start space-x-4 card">
+                <img src="profileee.png" alt="" class="h-12 w-12 rounded-full object-cover">
+                <div>
+                    <p class="text-gray-700">Great experience and lovely community.</p>
+                    <p class="text-sm font-semibold text-gray-900 mt-2">- Azaiah Fernandez</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="font-bold text-sm text-center footer mt-5 mb-4 cursor-pointer">&copy; 2025 Keiora. All rights reserved.</footer>
+</body>
+<script>
+    function handleSearch(){
+        var input = document.getElementById('searchInput');
+        var query = input && input.value.trim();
+        if(query){
+            alert('You searched for: '+ query);
+        }else{
+            alert('Please enter a search item.');
+        }
+    }
+
+    // Mobile menu toggle and close on link click
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', !mobileMenu.classList.contains('hidden'));
+        });
+        // Close menu when a link or button is clicked
+        mobileMenu.querySelectorAll('.mobile-menu-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
+    // Ensure search works on button click
+    const searchBtn = document.getElementById('searchBtn');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', handleSearch);
+    }
+    // Also allow Enter key in input
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') handleSearch();
+        });
+    }
+</script>
+</html>
